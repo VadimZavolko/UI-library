@@ -1,0 +1,844 @@
+.btn {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: block;
+    background-color: inherit;
+    border: 2px solid transparent;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+
+    &-radius {
+        border-radius: .4rem;
+    
+        &-long {
+            border-radius: 1rem;
+        }
+    
+        &-middle {
+            border-radius: .7rem;
+        }
+    }
+    
+    &:focus {
+        outline: none;
+    }
+
+    &-mistakes {
+        background-image: linear-gradient(to right, #e8d4b7 0%, #ff4757 51%, #e8d4b7 100%);
+        border: 2px solid white;
+        background-size: 200% auto;
+        color: #f7f9ff;
+        transition: 0.4s;
+        &:hover {
+            background-position: right center;
+        }
+    
+        &-outline:focus {
+            box-shadow: 0 0 0 .15rem #ff4757;
+        }
+    
+        &-hoverable {
+            background-color: #ff4757;
+            color: #f7f9ff;
+            border: 2px solid #ff4757;
+            transition: .4s;
+            box-shadow: 0 0 0 1px inset;
+            &:hover {
+                background-color: #fff;
+                color: #ff4757;
+            }
+    
+            &-white {
+                background-color: #fff;
+                color: #ff4757;
+                border: 2px solid #ff4757;
+                transition: .4s;
+                box-shadow: 0 0 0 1px inset;
+                &:hover {
+                    background-color: #ff4757;
+                    color: #f7f9ff;
+                }
+            }
+        }
+    
+        &-rectangle {
+            border: 2px solid #ff4757;
+            color: #ff4757;
+            position: relative;
+    
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                border: 2px solid rgba(0,0,0,0);
+                transition: .4s;
+            }
+    
+            &:hover::after {
+                border-color: #ff4757;
+                width: calc(100% - 10px);
+                height: calc(100% + 10px);
+            }
+        }
+    
+        &-shadow {
+            box-shadow: 0 0 1rem 1rem #ff4757 inset;
+            border: 2px solid #ff4757;
+            color: #fff;
+            transition: .3s;
+    
+            &:hover, &:focus {
+                box-shadow: 0 0 .8rem 0 #ff4757 inset, 0 0 .8rem .2rem #ff4757;
+                color: #ff4757;
+            }
+        }
+    }
+
+    &-success {
+        background-image: linear-gradient(to right, #9EEFE1 0%, #2ed573 51%, #9EEFE1 100%);
+        border: 2px solid white;
+        background-size: 200% auto;
+        color: #f7f9ff;
+        transition: 0.4s;
+        &:hover {
+            background-position: right center;
+        }
+        &-outline:focus {
+            box-shadow: 0 0 0 .15rem #7bed9f;
+        }
+    
+        &-hoverable {
+            background-color: #2ed573;
+            color: #f7f9ff;
+            border: 2px solid #2ed573;
+            transition: .4s;
+            box-shadow: 0 0 0 1px inset;
+            &:hover {
+                background-color: #fff;
+                color: #2ed573;
+            }
+    
+            &-white {
+                box-shadow: 0 0 0 1px inset;
+                background-color: #fff;
+                color: #2ed573;
+                border: 2px solid #2ed573;
+                transition: .4s;
+    
+                &:hover {
+                    background-color: #2ed573;
+                    color: #f7f9ff;
+                }
+            }
+        }
+    
+        &-rectangle {
+            border: 2px solid #2ed573;
+            color: #2ed573;
+            position: relative;
+    
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                border: 2px solid rgba(0,0,0,0);
+                transition: .4s;
+            }
+    
+            &:hover::after {
+                border-color: #2ed573;
+                width: calc(100% - 10px);
+                height: calc(100% + 10px);
+            }
+        }
+        
+        &-shadow {
+            box-shadow: 0 0 1rem 1rem #2ed573 inset;
+            border: 2px solid #2ed573;
+            color: #fff;
+            transition: .3s;
+    
+            &:hover, &:focus {
+                box-shadow: 0 0 .8rem 0 #2ed573 inset, 0 0 .8rem .2rem #2ed573;
+                color: #2ed573;
+            }
+        }
+    }
+
+    &-warnings {
+        background-image: linear-gradient(to right, #e3e8b7 0%, #ffa502 51%, #e3e8b7 100%);
+        border: 2px solid white;
+        background-size: 200% auto;
+        color: #f7f9ff;
+        transition: 0.4s;
+        &:hover {
+            background-position: right center;
+        }
+        &-outline:focus {
+            outline: none;
+            box-shadow: 0 0 0 .15rem #eccc68;
+        }
+    
+        &-hoverable {
+            background-color: #ffa502;
+            color: #f7f9ff;
+            border: 2px solid #ffa502;
+            transition: .4s;
+            box-shadow: 0 0 0 1px inset;
+            &:hover {
+                background-color: #fff;
+                color: #ffa502;
+            }
+            &:focus {
+                box-shadow: none;
+            }
+            &-white {
+                box-shadow: 0 0 0 1px inset;
+                background-color: #fff;
+                color: #ffa502;
+                border: 2px solid #ffa502;
+                transition: .4s;
+    
+                &:hover {
+                    background-color: #ffa502;
+                    color: #f7f9ff;
+                }        
+            }
+        }
+    
+        &-rectangle {
+            border: 2px solid #ffa502;
+            color: #ffa502;
+            position: relative;
+    
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                border: 2px solid rgba(0,0,0,0);
+                transition: .4s;
+            }
+    
+            &:hover::after {
+                border-color: #ffa502;
+                width: calc(100% - 10px);
+                height: calc(100% + 10px);
+            }
+        }
+    
+        &-shadow {
+            box-shadow: 0 0 1rem 1rem #ffa502 inset;
+            border: 2px solid #ffa502;
+            color: #fff;
+            transition: .3s;
+    
+            &:hover, &:focus {
+                box-shadow: 0 0 .8rem 0 #ffa502 inset, 0 0 .8rem .2rem #ffa502;
+                color: #ffa502;
+            }
+        }
+    }
+
+    &-info {
+        background-image: linear-gradient(to right, #b7e8e7 0%, #1e90ff 51%, #b7e8e7 100%);
+        border: 2px solid white;
+        background-size: 200% auto;
+        color: #f7f9ff;
+        transition: 0.4s;
+        &:hover {
+            background-position: right center;
+        }
+    
+        &-outline:focus {
+            box-shadow: 0 0 0 .15rem #70a1ff;
+        }
+    
+        &-hoverable {
+            box-shadow: 0 0 0 1px inset;
+            background-color: #1e90ff;
+            color: #f7f9ff;
+            border: 2px solid #1e90ff;
+            transition: .4s;
+    
+            &:hover {
+                background-color: #fff;
+                color: #1e90ff;
+            }
+    
+            &-white {
+                box-shadow: 0 0 0 1px inset;
+                background-color: #fff;
+                color: #1e90ff;
+                border: 2px solid #1e90ff;
+                transition: .4s;
+    
+                &:hover {
+                    background-color: #1e90ff;
+                    color: #f7f9ff;
+                }
+            }
+        }
+        
+        &-rectangle {
+            border: 2px solid #1e90ff;
+            color: #1e90ff;
+            position: relative;
+    
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                border: 2px solid rgba(0,0,0,0);
+                transition: .4s;
+            }
+    
+            &:hover::after {
+                border-color: #1e90ff;
+                width: calc(100% - 10px);
+                height: calc(100% + 10px);
+            }
+        }  
+    
+        &-shadow {
+            box-shadow: 0 0 1rem 1rem #1e90ff inset;
+            border: 2px solid #1e90ff;
+            color: #fff;
+            transition: .3s;
+    
+            &:hover, &:focus {
+                box-shadow: 0 0 .8rem 0 #1e90ff inset, 0 0 .8rem .2rem #1e90ff;
+                color: #1e90ff;
+            }
+        }
+    }
+
+    &-black {
+        background-color: #2f3542;
+        border: 2px solid black;
+        transition: 0.4s;
+        &:hover {
+            background-color: #57606f;
+        }
+    
+        &-outline:focus {
+            box-shadow: 0 0 0 .15rem #57606f;
+        }
+    
+        &-hoverable {
+            background-color: #2f3542;
+            color: #f7f9ff;
+            border: 2px solid #2f3542;
+            transition: .4s;
+            box-shadow: 0 0 0 1px inset;
+            &:hover {
+                background-color: #fff;
+                color: #2f3542;
+            }
+            &-white {
+                box-shadow: 0 0 0 1px inset;
+                background-color: #fff;
+                color: #2f3542;
+                border: 2px solid #2f3542;
+                transition: .4s;
+    
+                &:hover {
+                    background-color: #2f3542;
+                    color: #f7f9ff;
+                }
+            }
+        }
+    
+        &-rectangle {
+            border: 2px solid #2f3542;
+            color: #2f3542;
+            position: relative;
+    
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                border: 2px solid rgba(0,0,0,0);
+                transition: .4s;
+            }
+    
+            &:hover::after {
+                border-color: #2f3542;
+                width: calc(100% - 10px);
+                height: calc(100% + 10px);
+            }
+        }
+     
+        &-shadow {
+            box-shadow: 0 0 1rem 1rem #2f3542 inset;
+            border: 2px solid #2f3542;
+            color: #fff;
+            transition: .3s;
+    
+            &:hover, &:focus {
+                box-shadow: 0 0 .8rem 0 #2f3542 inset, 0 0 .8rem .2rem #2f3542;
+                color: #2f3542;
+            }
+        }
+    }
+
+    &-white {
+        background-color: #f1f2f6;
+        border: 2px solid #e7e7e7;
+        transition: 0.3s background-color linear;
+        &:hover {
+            background-color: #ffffff;
+        }
+        &-outline:focus {
+            box-shadow: 0 0 0 .15rem #e7e7e7;
+        }
+    }
+
+    &-circle {
+        border-radius: 50%;
+    }
+
+    &:disabled {
+        cursor: unset;
+        background-image: none;
+        background-color: #dfe4ea;
+        &:hover {
+            background-color: #dfe4ea;
+        }
+    }
+
+    &-small {
+        min-width: 5rem;
+    }
+
+    &-middle {
+        min-width: 10rem;
+    }
+
+    &-long {
+        min-width: 15rem;
+    }
+
+    &-small.btn-circle {
+        min-width: 5rem;
+        min-height: 5rem;
+    }
+
+    &-middle.btn-circle {
+        min-width: 10rem;
+        min-height: 10rem;
+    }
+
+    &-long.btn-circle {
+        min-width: 15rem;
+        min-height: 15rem;
+    }
+}
+
+.checkbox {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    cursor: pointer;
+    & input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    & span {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background-color: #dfe4ea;
+        border-radius: .15rem;
+    }
+
+    & span::before {
+        content: '\2714';
+        font-size: 20px;
+        left: 0;
+        bottom: -0.15rem;
+        color: black;
+        position: absolute;
+        transform:  scale(0);
+        transition: .5s;
+    }
+
+    & input[type='checkbox']:checked + span {
+        background-color: #7bed9f;
+    }
+
+    & input[type='checkbox']:checked + span::before {
+        transform:  scale(1);
+    }
+
+    &-small {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        cursor: pointer;
+        & input[type='checkbox'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 15px;
+            height: 15px;
+            background-color: #dfe4ea;
+            border-radius: .15rem;
+        }
+
+        & span::before {
+            content: '\2714';
+            font-size: 15px;
+            left: 0;
+            bottom: -0.15rem;
+            color: black;
+            position: absolute;
+            transform:  scale(0);
+            transition: .5s;
+        }
+
+        & input[type='checkbox']:checked + span {
+            background-color: #7bed9f;
+        }
+
+        & input[type='checkbox']:checked + span::before {
+            transform:  scale(1);
+        }
+    }
+
+    &-long {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        cursor: pointer;
+        & input[type='checkbox'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 25px;
+            height: 25px;
+            background-color: #dfe4ea;
+            border-radius: .15rem;
+        }
+
+        & span::before {
+            content: '\2714';
+            font-size: 25px;
+            left: 0;
+            bottom: -0.15rem;
+            color: black;
+            position: absolute;
+            transform:  scale(0);
+            transition: .5s;
+        }
+
+        & input[type='checkbox']:checked + span {
+            background-color: #7bed9f;
+        }
+
+        & input[type='checkbox']:checked + span::before {
+            transform:  scale(1);
+        }
+    }
+}
+
+.checkbox-circle {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    & input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    & span {
+        display: inline-block;
+        position: relative;
+        width: 40px;
+        height: 20px;
+        background-color: #dfe4ea;
+        border-radius: 20px;
+    }
+
+    & span::before {
+        content: '';
+        background-color: #f1f2f6;
+        width: 50%;
+		height: 100%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: -3%;
+        margin: auto 0;
+        border-radius: 50%;
+        position: absolute;
+        transition: .5s;
+    }
+
+    & input[type='checkbox']:checked + span {
+        background-color: #7bed9f;
+    }
+
+    & input[type='checkbox']:checked + span::before {
+        transform: translateX(108%);
+    }
+
+    &-small {
+        position: relative;
+        display: block;
+        cursor: pointer;
+        & input[type='checkbox'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 30px;
+            height: 15px;
+            background-color: #dfe4ea;
+            border-radius: 20px;
+        }
+
+        & span::before {
+            content: '';
+            background-color: #f1f2f6;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: -3%;
+            margin: auto 0;
+            border-radius: 50%;
+            position: absolute;
+            transition: .5s;
+        }
+
+        & input[type='checkbox']:checked + span {
+            background-color: #7bed9f;
+        }
+
+        & input[type='checkbox']:checked + span::before {
+            transform: translateX(108%);
+        }
+    }
+
+    &-long {
+        position: relative;
+        display: block;
+        cursor: pointer;
+        & input[type='checkbox'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 45px;
+            height: 25px;
+            background-color: #dfe4ea;
+            border-radius: 20px;
+        }
+
+        & span::before {
+            content: '';
+            background-color: #f1f2f6;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: -3%;
+            margin: auto 0;
+            border-radius: 50%;
+            position: absolute;
+            transition: .5s;
+        }
+
+        & input[type='checkbox']:checked + span {
+            background-color: #7bed9f;
+        }
+
+        & input[type='checkbox']:checked + span::before {
+            transform: translateX(108%);
+        }
+    }
+}
+
+.radio {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    & input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    & span {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background-color: #dfe4ea;
+        border-radius: 50%;
+        border: 1px solid rgba(0,0,0,0);
+    }
+
+    & span::before {
+        content: '';
+        background-color: #7bed9f;
+        width: 70%;
+        height: 70%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 50%; 
+        transform: scale(0);
+        transition: .5s;
+    }
+
+    & input[type='radio']:checked + span {
+        border-color: #7bed9f;
+    }
+
+    & input[type='radio']:checked + span::before {
+        transform: scale(1);
+    }
+
+    &-small {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        cursor: pointer;
+        & input[type='radio'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 15px;
+            height: 15px;
+            background-color: #dfe4ea;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0);
+        }
+
+        & span::before {
+            content: '';
+            background-color: #7bed9f;
+            width: 70%;
+            height: 70%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 1%;
+            right: 0;
+            margin: auto;
+            border-radius: 50%; 
+            transform: scale(0);
+            transition: .5s;
+        }
+
+        & input[type='radio']:checked + span {
+            border-color: #7bed9f;
+        }
+
+        & input[type='radio']:checked + span::before {
+            transform: scale(1);
+        }
+    }
+
+    &-long {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        cursor: pointer;
+        & input[type='radio'] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        & span {
+            display: inline-block;
+            position: relative;
+            width: 25px;
+            height: 25px;
+            background-color: #dfe4ea;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0);
+        }
+
+        & span::before {
+            content: '';
+            background-color: #7bed9f;
+            width: 70%;
+            height: 70%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 1%;
+            right: 0;
+            margin: auto;
+            border-radius: 50%; 
+            transform: scale(0);
+            transition: .5s;
+        }
+
+        & input[type='radio']:checked + span {
+            border-color: #7bed9f;
+        }
+
+        & input[type='radio']:checked + span::before {
+            transform: scale(1);
+        }
+    }
+}
