@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-library</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet/less" type="text/css" href="less/grid.less">
+    <link rel="stylesheet/less" type="text/css" href="less/button.less">
+    <link rel="stylesheet/less" type="text/css" href="less/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+<body>
+    <header>
+      <div class="container">
+        <div class="logo"><img src="favicon.png" alt="Bunny"><h1>UI-library</h1></div>
+      </div>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <section>
+            <div class="container">
+              <h2>Grid</h2>
+              <p>Use row to indicate the string and col{{- md | sm | xl | lg}{- 1..12}} to divide into columns</p>
+                <div class="row">
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">col-4</div>
+                    <div class="col-4">col-4</div>
+                    <div class="col-4">col-4</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">col-6</div>
+                    <div class="col-6">col-6</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">col-12</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-1">col-1</div>
+                    <div class="col-11">col-11</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2">col-2</div>
+                    <div class="col-10">col-10</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">col-3</div>
+                    <div class="col-9">col-9</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">col-4</div>
+                    <div class="col-8">col-8</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5">col-5</div>
+                    <div class="col-7">col-7</div>
+                </div>
+
+                <h3>Columns total more than 12</h3>
+                  <div class="row">
+                    <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                  </div>
+                <h3>Columns in column</h3>
+                  <div class="row">
+                    <div class="col-6" style="margin-right: 1rem;">
+                      <div class="col-6">.col-6</div>
+                      <div class="col-6">.col-6</div>
+                    </div>
+                    <div class="col-6" style="margin-right: 1rem;">
+                      <div class="col-12">.col-12</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                    </div>
+                  </div>
+            </div>
+        </section>
+        <section>
+            <h2>Grid container</h2>
+            <p>Containers class container-sm(width 540px), container-md(width 720px), container-lg(width 960px), container-xl(width 1140px), container-fluid(width 100%)</p>
+            <div class="container-sm">container-sm</div>
+            <div class="container-md">container-md</div>
+            <div class="container-lg">container-lg</div>
+            <div class="container-xl">container-xl</div>
+            <div class="container-fluid">container-fluid</div>  
+        </section>
+        <section>
+            <div class="container">
+              <h2>Grid flex</h2>
+              <h3>align-items-start</h3>
+                <div class="row align-items-start">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>align-items-center</h3>  
+                <div class="row align-items-center">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>align-items-end</h3>  
+                <div class="row align-items-end">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>justify-content-center</h3>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                </div>
+              <h3>justify-content-start</h3>
+              <div class="row justify-content-start align-items-center">
+                  <div class="col-2"></div>
+                  <div class="col-2"></div>
+              </div>
+              <h3>justify-content-end</h3>
+              <div class="row justify-content-end align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>justify-content-between</h3>
+              <div class="row justify-content-between align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>justify-content-around</h3>
+              <div class="row justify-content-around align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>align-self-center, align-self-start, align-self-end</h3>
+              <div class="row justify-content-center">
+                <div class="col-2 align-self-center"></div>
+                <div class="col-2 align-self-start"></div>
+                <div class="col-2 align-self-end"></div>
+              </div>
+            </div>
+        </section>
+
+        <section class="buttons">
+          <div class="container">
+            <h2>Buttons</h2>
+            <p>Type: mistakes, success, warnings, info, white, black</p>
+
+            <h3>Buttons class btn-{type}</h3>
+              <div class="row justify-content-center">   
+                <button type="button" class="btn btn-mistakes">TEXT</button>
+                <button type="button" class="btn btn-success">TEXT</button>
+                <button type="button" class="btn btn-warnings">TEXT</button>
+                <button type="button" class="btn btn-info">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-hoverable</h3>
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-mistakes-hoverable">TEXT</button>
+                <button type="button" class="btn btn-success-hoverable">TEXT</button>
+                <button type="button" class="btn btn-warnings-hoverable">TEXT</button>
+                <button type="button" class="btn btn-info-hoverable">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-hoverable-white</h3>
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-mistakes-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-success-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-warnings-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-info-hoverable-white">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-rectangle</h3>  
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes-rectangle">TEXT</button>
+                <button type="button" class="btn btn-success-rectangle">TEXT</button>
+                <button type="button" class="btn  btn-warnings-rectangle">TEXT</button>
+                <button type="button" class="btn btn-info-rectangle">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-shadow</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes-shadow">TEXT</button>
+                <button type="button" class="btn btn-success-shadow">TEXT</button>
+                <button type="button" class="btn  btn-warnings-shadow">TEXT</button>
+                <button type="button" class="btn btn-info-shadow">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-outline</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes btn-mistakes-outline">TEXT</button>
+                <button type="button" class="btn btn-success btn-success-outline">TEXT</button>
+                <button type="button" class="btn  btn-warnings btn-warnings-outline">TEXT</button>
+                <button type="button" class="btn btn-info btn-info-outline">TEXT</button>
+              </div> 
+            <h3>Buttons class btn-{small|middle|long} and btn-circle</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-middle btn-success btn-success-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-long  btn-warnings btn-warnings-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-circle btn-small btn-info btn-info-outline">TEXT</button>
+              </div>
+            <h3>Buttons disabled</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-middle btn-success btn-success-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-long  btn-warnings btn-warnings-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-circle btn-info btn-info-outline" disabled>X</button>
+              </div>
+            <h3>Buttons class btn-radius{-{long|middle}}</h3>
+              <p>classes applied to input</p>    
+              <div class="row justify-content-center">
+                <input type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline btn-radius" value="TEXT">
+                <input type="button" class="btn btn-middle btn-success btn-success-outline btn-radius-long" value="TEXT">
+                <input type="button" class="btn btn-long  btn-warnings btn-warnings-outline btn-radius-middle" value="TEXT">
+              </div>
+              <h3>Buttons class checkbox{-circle}{-{small|long}} and radio{-{small|long}}</h3>
+              <pre>
+                Use the construct for correct operation:
+                <code>
+                  &lsaquo;label class="checkbox{-circle}{-{small|long}}|radio{-{small|long}}"&rsaquo;&lsaquo;input type="checkbox|radio"&rsaquo;&lsaquo;span&rsaquo;&lsaquo;/span&rsaquo;&lsaquo;/label&rsaquo;
+                </code>
+              </pre> 
+              <div class="row justify-content-center">
+                <label class="checkbox-long" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle-long" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio-long"><input type="radio" class=""><span></span></label>
+              </div> 
+              <div class="row justify-content-center">
+                <label class="checkbox" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio"><input type="radio" class=""><span></span></label>
+              </div>
+              <div class="row justify-content-center">
+                <label class="checkbox-small" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle-small" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio-small"><input type="radio" class=""><span></span></label>
+              </div>
+            </div>
+        </section>
+      </div>
+    </main>
+</body>
+</html>
