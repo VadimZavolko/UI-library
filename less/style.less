@@ -2,11 +2,11 @@
     box-sizing: border-box;
 }
 body, html {
-    height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
 }
 
 section:nth-child(2) {
@@ -34,16 +34,6 @@ h1 {
 header .container {
     padding: 1rem;
     color: #2f3542;
-}
-
-.logo {
-    display: flex;
-    align-items: baseline;
-}
-
-.logo img {
-    width: 50px;
-    height: 50px;
 }
 
 [class^='col'] {
@@ -77,8 +67,19 @@ section:nth-child(3) .row {
     height: 100px;
 }
 
-@media (max-width: 575px) {
-    section.buttons {
-        display: none;
-    }
+pre {
+    white-space: pre-wrap;
 }
+
+.buttons-number p {
+    margin: 0 8%;
+}
+
+.modal-footer .btn {
+    font-size: 15px;
+}
+
+section.section-modal {
+    margin: 10% 0;
+}
+

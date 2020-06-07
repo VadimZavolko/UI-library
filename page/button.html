@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-library</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/grid.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/button.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/nav.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/style.less">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,300&display=swap" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo"><img src="/UI-library/favicon.png" alt="Bunny"><h1>UI-library</div>
+          <div class="burger"><i class="fas fa-bars"></i></div>
+          <ul class="nav-menu">
+              <li class="menu-item"><a href="grid.html" class="item-link">Grid</a></li>
+              <li class="menu-item"><a href="button.html" class="item-link">Button</a></li>
+              <li class="menu-item"><a href="/UI-library/index.html"class="item-link">New</a></li>
+              <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-twitter"></i></a></li>
+              <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-google"></i></a></li>
+              <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-facebook-square"></i></a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <section class="buttons">
+          <div class="container">
+            <h2>Buttons</h2>
+            <p>Type: mistakes, success, warnings, info, white, black</p>
+
+            <h3>Buttons class btn-{type}</h3>
+              <div class="row justify-content-center">   
+                <button type="button" class="btn btn-mistakes-gradient">TEXT</button>
+                <button type="button" class="btn btn-success-gradient">TEXT</button>
+                <button type="button" class="btn btn-warnings-gradient">TEXT</button>
+                <button type="button" class="btn btn-info">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-hoverable</h3>
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-mistakes-hoverable">TEXT</button>
+                <button type="button" class="btn btn-success-hoverable">TEXT</button>
+                <button type="button" class="btn btn-warnings-hoverable">TEXT</button>
+                <button type="button" class="btn btn-info-hoverable">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-hoverable-white</h3>
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-mistakes-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-success-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-warnings-hoverable-white">TEXT</button>
+                <button type="button" class="btn btn-info-hoverable-white">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-rectangle</h3>  
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes-rectangle">TEXT</button>
+                <button type="button" class="btn btn-success-rectangle">TEXT</button>
+                <button type="button" class="btn  btn-warnings-rectangle">TEXT</button>
+                <button type="button" class="btn btn-info-rectangle">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-shadow</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes-shadow">TEXT</button>
+                <button type="button" class="btn btn-success-shadow">TEXT</button>
+                <button type="button" class="btn  btn-warnings-shadow">TEXT</button>
+                <button type="button" class="btn btn-info-shadow">TEXT</button>
+              </div>
+            <h3>Buttons class btn-{type}-outline</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn  btn-mistakes btn-mistakes-outline">TEXT</button>
+                <button type="button" class="btn btn-success btn-success-outline">TEXT</button>
+                <button type="button" class="btn  btn-warnings btn-warnings-outline">TEXT</button>
+                <button type="button" class="btn btn-info btn-info-outline">TEXT</button>
+              </div> 
+            <h3>Buttons class btn-{small|middle|long} and btn-circle</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-middle btn-success btn-success-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-long  btn-warnings btn-warnings-outline align-self-end">TEXT</button>
+                <button type="button" class="btn btn-circle btn-small btn-info btn-info-outline">TEXT</button>
+              </div>
+            <h3>Buttons disabled</h3>    
+              <div class="row justify-content-center">
+                <button type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-middle btn-success btn-success-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-long  btn-warnings btn-warnings-outline" disabled>TEXT</button>
+                <button type="button" class="btn btn-circle btn-info btn-info-outline" disabled>X</button>
+              </div>
+            <h3>Buttons class btn-radius{-{long|middle}}</h3>
+              <p>classes applied to input</p>    
+              <div class="row justify-content-center">
+                <input type="button" class="btn btn-small  btn-mistakes btn-mistakes-outline btn-radius" value="TEXT">
+                <input type="button" class="btn btn-middle btn-success btn-success-outline btn-radius-long" value="TEXT">
+                <input type="button" class="btn btn-long  btn-warnings btn-warnings-outline btn-radius-middle" value="TEXT">
+              </div>
+              <h3>Buttons class checkbox{-circle}{-{small|long}} and radio{-{small|long}}</h3>
+              <pre>
+                Use the construct for correct operation:
+                <code>
+                  &lsaquo;label class="checkbox{-circle}{-{small|long}}|radio{-{small|long}}"&rsaquo;&lsaquo;input type="checkbox|radio"&rsaquo;&lsaquo;span&rsaquo;&lsaquo;/span&rsaquo;&lsaquo;/label&rsaquo;
+                </code>
+              </pre> 
+              <div class="row justify-content-center">
+                <label class="checkbox-long" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle-long" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio-long"><input type="radio" class=""><span></span></label>
+              </div> 
+              <div class="row justify-content-center">
+                <label class="checkbox" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio"><input type="radio" class=""><span></span></label>
+              </div>
+              <div class="row justify-content-center">
+                <label class="checkbox-small" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="checkbox-circle-small" style="margin-right: 15px;"><input type="checkbox"><span></span></label>
+                <label class="radio-small"><input type="radio" class=""><span></span></label>
+              </div>
+            </div>
+        </section>
+    <script src="/UI-library/js/nav.js"></script>
+    <script src="https://kit.fontawesome.com/a92211bf3b.js" crossorigin="anonymous"></script>
+</body>
+</html>

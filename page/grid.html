@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-library</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/grid.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/nav.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/style.less">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,300&display=swap" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo"><img src="/UI-library/favicon.png" alt="Bunny"><h1>UI-library</div>
+          <div class="burger"><i class="fas fa-bars"></i></div>
+          <ul class="nav-menu">
+            <li class="menu-item"><a href="grid.html" class="item-link">Grid</a></li>
+            <li class="menu-item"><a href="button.html" class="item-link">Button</a></li>
+            <li class="menu-item"><a href="/UI-library/index.html"class="item-link">New</a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-twitter"></i></a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-google"></i></a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-facebook-square"></i></a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <section>
+            <div class="container">
+              <h2>Grid</h2>
+              <p>Use row to indicate the string and col{{- md | sm | xl | lg}{- 1..12}} to divide into columns</p>
+                <div class="row">
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                    <div class="col-1">col-1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                    <div class="col-2">col-2</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                    <div class="col-3">col-3</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">col-4</div>
+                    <div class="col-4">col-4</div>
+                    <div class="col-4">col-4</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">col-6</div>
+                    <div class="col-6">col-6</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">col-12</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-1">col-1</div>
+                    <div class="col-11">col-11</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2">col-2</div>
+                    <div class="col-10">col-10</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">col-3</div>
+                    <div class="col-9">col-9</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">col-4</div>
+                    <div class="col-8">col-8</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5">col-5</div>
+                    <div class="col-7">col-7</div>
+                </div>
+
+                <h3>Columns total more than 12</h3>
+                  <div class="row">
+                    <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                  </div>
+                <h3>Columns in column</h3>
+                  <div class="row">
+                    <div class="col-6" style="margin-right: 1rem;">
+                      <div class="col-6">.col-6</div>
+                      <div class="col-6">.col-6</div>
+                    </div>
+                    <div class="col-6" style="margin-right: 1rem;">
+                      <div class="col-12">.col-12</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                      <div class="col-3">col-3</div>
+                    </div>
+                  </div>
+            </div>
+        </section>
+        <section>
+            <h2>Grid container</h2>
+            <p>Containers class container-sm(width 540px), container-md(width 720px), container-lg(width 960px), container-xl(width 1140px), container-fluid(width 100%)</p>
+            <div class="container-sm">container-sm</div>
+            <div class="container-md">container-md</div>
+            <div class="container-lg">container-lg</div>
+            <div class="container-xl">container-xl</div>
+            <div class="container-fluid">container-fluid</div>  
+        </section>
+        <section>
+            <div class="container">
+              <h2>Grid flex</h2>
+              <h3>align-items-start</h3>
+                <div class="row align-items-start">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>align-items-center</h3>  
+                <div class="row align-items-center">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>align-items-end</h3>  
+                <div class="row align-items-end">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                </div>
+              <h3>justify-content-center</h3>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                </div>
+              <h3>justify-content-start</h3>
+              <div class="row justify-content-start align-items-center">
+                  <div class="col-2"></div>
+                  <div class="col-2"></div>
+              </div>
+              <h3>justify-content-end</h3>
+              <div class="row justify-content-end align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>justify-content-between</h3>
+              <div class="row justify-content-between align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>justify-content-around</h3>
+              <div class="row justify-content-around align-items-center">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+              </div>
+              <h3>align-self-center, align-self-start, align-self-end</h3>
+              <div class="row justify-content-center">
+                <div class="col-2 align-self-center"></div>
+                <div class="col-2 align-self-start"></div>
+                <div class="col-2 align-self-end"></div>
+              </div>
+            </div>
+        </section>
+    <script src="/UI-library/js/nav.js"></script>
+    <script src="https://kit.fontawesome.com/a92211bf3b.js" crossorigin="anonymous"></script>
+</body>
+</html>
