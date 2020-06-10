@@ -1,11 +1,15 @@
 nav {
+    position: fixed;
+    top: 0;
     box-sizing: border-box;
     display: flex;
     align-items: baseline;
+    background-image: linear-gradient(to right, #69FF97 30%, #00E4FF);
     justify-content: space-between;
     width: 100%;
     font-size: 20px;
     padding: 1%;
+    z-index: 4;
 
     .logo {
         font-size: 25px;
@@ -36,7 +40,7 @@ nav {
         }  
     }
 
-    @media (min-width: 576px) {
+    @media (min-width: 710px) {
         .burger {
             display: none;
         }
@@ -50,10 +54,10 @@ nav {
         }
     }
 
-    @media (max-width: 575.9px) {
+    @media (max-width: 709.9px) {
         & {
             justify-content: center;
-            position: relative;
+            position: fixed;
         }
 
         .burger {

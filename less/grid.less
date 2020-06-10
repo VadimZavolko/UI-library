@@ -12,15 +12,15 @@
 
 .container {
     margin: 0 auto;
+}
 
-    &-fluid {
-        width: 100%;
-    }
+.container-fluid {
+    width: 100%;
 }
 
 .col {
     flex: 1 0 0;
-
+} 
     .col-standart-width('xl');
 
     .col-standart-width('sm');
@@ -28,7 +28,6 @@
     .col-standart-width('md');
 
     .col-standart-width('lg');
-}
 
 
     @media (max-width: 575px) { 
@@ -67,22 +66,62 @@
 
     // Малые девайсы (горизонтальные телефоны, >= 576px)
     @media (min-width: 576px) {
-        .size-point(540px, 'sm');
+        .container { 
+            max-width: 540px;
+            .container;   
+        }
+    
+        .container-sm{
+            max-width: 540px;
+            .container;
+        }
+    
+        .size-point('sm');
     }
 
     // Средние девайсы (планшеты, >= 768px)
-    @media (min-width: 768px) { 
-        .size-point(720px, 'md');
+    @media (min-width: 768px) {
+        .container { 
+            max-width: 720px;
+            .container;   
+        }
+    
+        .container-md{
+            max-width: 720px;
+            .container;
+        }
+     
+        .size-point('md');
     }
 
     // Большие девайсы (десктопы, >= 992px)
     @media (min-width: 992px) {
-        .size-point(960px, 'lg');
+        .container { 
+            max-width: 992px;
+            .container;   
+        }
+    
+        .container-lg{
+            max-width: 992px;
+            .container;
+        }
+    
+        .size-point('lg');
     }
 
     // Экстрабольшие девайсы (большие десктопы, >= 1200px)
     @media (min-width: 1200px) {
-        .size-point(1140px, 'xl');
+        .container { 
+            max-width: 1200px;
+            .container;   
+        }
+    
+        .container-xl{
+            max-width: 1200px;
+            .container;
+        }
+    
+        .size-point('xl');
     }
 
     .justify-content-start {
@@ -162,16 +201,7 @@
     }
 
     
-.size-point(@width-container, @type){
-    .container { 
-        max-width: @width-container;
-        .container;
-        &-@{type}{
-            max-width: @width-container;
-            .container;
-        }
-    }
-
+.size-point(@type){
     .col {
         .col-loop (@i) when (@i <= 12) {
             @width: calc(~"@{i}/12*100%");
