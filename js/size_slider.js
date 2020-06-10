@@ -8,8 +8,8 @@ btnsNumber.onclick = () => {
             item.dataset.visible = btn.dataset.number;
             item.innerHTML = '';
         });
-        Carousel("carousel4", config1);
-        Carousel("carousel5", config1);
-        Carousel("carousel6", config1);
+        new Carousel("carousel4", config1).addCarousel();
+        new Carousel("carousel5", config1).addCarousel();
+        new Carousel("carousel6", config1).addCarousel();
     }
 }
