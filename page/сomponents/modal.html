@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-library</title>
+    <link rel="icon" type="image/png" href="/UI-library/favicon.png">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/grid.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/button.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/nav.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/style.less">
+    <link rel="stylesheet/less" type="text/css" href="/UI-library/less/modal.less">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet"> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo"><img src="/UI-library/favicon.png" alt="Bunny"><h1>UI-library</div>
+          <div class="burger"><i class="fas fa-bars"></i></div>
+          <ul class="nav-menu">
+            <li class="menu-item"><a href="/UI-library/page/grid.html" class="item-link">Grid</a></li>
+            <li class="menu-item menu-items">Components
+                <ul class="items-list">
+                  <li class="menu-item"><a href="/UI-library/page/сomponents/button.html" class="item-link">Button</a></li>
+                  <li class="menu-item"><a href="/UI-library/page/сomponents/modal.html" class="item-link">Modal</a></li>
+                  <li class="menu-item"><a href="/UI-library/page/сomponents/carusel.html" class="item-link">Carusel</a></li>
+                </ul>
+              </li>
+            <li class="menu-item"><a href="/UI-library/index.html"class="item-link">New</a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-twitter"></i></a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-google"></i></a></li>
+            <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-facebook-square"></i></a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      <div class="container-lg">
+        <section class="section-modal">
+            <h2>Modal</h2>
+            <pre>
+            use this construct for correct operation
+            <code>
+                &lsaquo;button class="modal-trigger" data-target="send"&rsaquo;send&lsaquo;/button&rsaquo;
+
+                &lsaquo;div class="modal" id="send"&rsaquo;
+                … some html content
+                &lsaquo;button class="modal-close"&rsaquo;OK&lsaquo;/button&rsaquo;
+                &lsaquo;/div&rsaquo;
+            </code>
+            </pre>
+            <button class="btn btn-info-hoverable modal-trigger" data-target="info-modal">Info modal</button>
+            <div class="modal" id="info-modal">
+            <div class="modal-header">
+                <p>Information on Modal</p>
+            </div>
+            <div class="modal-main">
+                <p>
+                id - a unique identifier that is added to the modal window <br>
+                Add: modal
+                </p>
+                <p>
+                data-target - used to indicate buttons on which modal window it refers <br>
+                Add: button
+                </p>
+                <p>
+                modal-trigger - used to indicate that the button opens a modal window <br>
+                Add: button
+                </p> 
+                <p>
+                modal-close - used to indicate that the button closes the modal window <br>
+                Add: button
+                </p>
+                <p>
+                modal-header - class for specifying the window heading <br>
+                Add: modal
+                </p>
+                <p>
+                modal-main - class for specifying the main content of the window <br>
+                Add: modal
+                </p>
+                <p>
+                modal-footer - class for specifying the footer of the window <br>
+                Add: modal
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success-hoverable modal-close">OK</button>
+            </div>   
+            </div>
+            <h3>Use several buttons in the modal window and through it open other modal windows</h3>
+            <div class="row justify-content-center">
+            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
+            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal2">Open</button>
+            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal3">Open</button>
+            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
+            </div>
+            <div class="modal" id="modal1">
+            <div class="modal-header">
+                <p>Modal1</p>
+            </div>
+            <div class="modal-main">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-mistakes-hoverable modal-close">Close</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal2">Open</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
+            </div>
+            </div>
+            <div class="modal" id="modal2">
+            <div class="modal-header">
+                <p>Modal2</p>
+            </div>
+            <div class="modal-main">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-mistakes-hoverable modal-close">Close</button>
+                <button class="btn btn-mistakes-hoverable modal-close">Close</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
+            </div>
+            </div>
+            <div class="modal" id="modal3">
+            <div class="modal-header">
+                <p>Modal3</p>
+            </div>
+            <div class="modal-main">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut l
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-mistakes-hoverable modal-close">Close</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
+            </div>
+            </div>
+            <div class="modal" id="modal4">
+            <div class="modal-header">
+                <p>Modal4</p>
+            </div>
+            <div class="modal-main">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-mistakes-hoverable modal-close">Close</button>
+                <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal3">Open</button>
+            </div>
+            </div>
+      </section> 
+    </div>
+    </main>
+    <script src="/UI-library/js/modal.js"></script>
+    <script src="/UI-library/js/nav.js"></script>
+    <script src="https://kit.fontawesome.com/a92211bf3b.js" crossorigin="anonymous"></script>
+</body>
+</html>

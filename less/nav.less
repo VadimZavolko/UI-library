@@ -28,6 +28,64 @@ nav {
         padding: 0;
         display: flex;
         font-family: 'Roboto', sans-serif;
+
+        .menu-items {
+            position: relative;
+            cursor: pointer;
+            color: #57606f;
+            text-decoration: none;
+            transition: .4s;
+            &:hover {
+                color: #ff7f50;
+            }
+
+            &:hover .items-list{
+                display: block;
+                top: 100%;
+            }
+
+            .items-list {
+                position: absolute;
+                padding: 0;
+                left: 0;
+                border: 1px solid #a4b0be;
+                border-radius: .2rem;
+                list-style: none;
+                transition: .4s;
+                display: none;
+                background-color: #7bed9f;
+                z-index: 4;
+                .menu-item {
+                   margin: 0;
+                   text-align: center;
+                    a.item-link {
+                        &:first-child {
+                            border-top-left-radius: .2rem;
+                            border-top-right-radius: .2rem;
+                        }
+
+                        &:last-child {
+                            border-bottom-left-radius: .2rem;
+                            border-bottom-right-radius: .2rem;
+                        }
+
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        color: #57606f;
+                        text-decoration: none;
+                        transition: .4s;
+                        &:hover {
+                            background-color: #2ed573;
+                            text-shadow: -1px -1px 1px #0c7437,
+                            1px 1px 1px #46b674;
+                            color: #f1f2f6; 
+                        }
+                    }
+                }  
+            }
+        }
+
         .menu-item {
             .item-link {
                 color: #57606f;
@@ -46,6 +104,12 @@ nav {
         }
 
         .nav-menu {
+            .items-list {
+                width: 150%;
+                a.item-link {
+                    padding: 5% 0;
+                }  
+            }
             align-items: center;
             min-width: 20%;
             .menu-item {
@@ -86,7 +150,10 @@ nav {
             &-block {
                 display: flex;
             }
-
+            .items-list {
+                width: 100%;
+                text-align: center;
+            }
             display: none;
             position: absolute;
             border: 1px solid #a4b0be;
@@ -104,7 +171,7 @@ nav {
                 text-align: center;
                 
                 a.item-link {
-                    display:block;
+                    display: block;
                     padding: 3% 0;
                     width: 100%;
                     height: 100%;

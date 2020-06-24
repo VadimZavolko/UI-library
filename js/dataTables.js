@@ -79,6 +79,7 @@ class DataTable {
         let value = null;
         this.config.search.fields.forEach(field => {
           this.config.search.filters.forEach(f => {
+            console.log(f(this._search.value));
             if(f(item[field]).includes(f(this._search.value))) {
               value = item;
             }
@@ -98,13 +99,10 @@ class DataTable {
       i.setAttribute('class', col.type === undefined ? 'fas fa-sort' : 'fas fa-long-arrow-alt-up');
       td.appendChild(buttonSort);
       buttonSort.onclick = () => {
-        if(this._clickButton !== undefined && buttonSort !== this._clickButton
-              && !this._clickButton.firstChild.classList.contains('fa-long-arrow-alt-up') 
-                && !this._clickButton.firstChild.classList.contains('fa-sort')) {   
+        if(this._clickButton !== undefined && (buttonSort.firstChild.classList.contains('fa-long-arrow-alt-up') || buttonSort.firstChild.classList.contains('fa-sort'))) {   
           this._sortTypes.push({data: [...this._alterData], btn: this._clickButton, class: this._clickButton.firstChild.className});
           this._clickButton.firstChild.className = this._clickButton.dataset.type === 'string' || this._clickButton.dataset.type === 'number' ? 'fas fa-long-arrow-alt-up' : 'fas fa-sort';
         }
-        console.log(this._sortTypes)
         const sortData = this.#sortCol(this._alterData, i, col.value);
         this.#changeSortIcon(i, type);
         this._alterData = sortData;
@@ -114,6 +112,7 @@ class DataTable {
             const sort = this._sortTypes.pop();
             sort.btn.firstChild.className = sort.class; 
             this._alterData = sort.data;
+            this._clickButton = sort.btn;
           } else {
             this._alterData = [...this.data];
           }
@@ -211,7 +210,7 @@ class DataTable {
     "n": "т", "m": "ь", ",": "б", ".": "ю", "/": "."
   };
 
-  return str.replace('\[a-z/[/]/.;,/]\g', (symbol) => {
+  return str.replace(/[A-zА-я0-9\[\]\.\;\/\,]/g, (symbol) => {
     return keyboardLayoutRu[symbol.toLowerCase()] !== undefined ?  keyboardLayoutRu[symbol.toLowerCase()] : symbol.toLowerCase();
   });
 }

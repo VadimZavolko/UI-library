@@ -25,7 +25,13 @@
           <div class="burger"><i class="fas fa-bars"></i></div>
           <ul class="nav-menu">
             <li class="menu-item"><a href="/UI-library/page/grid.html" class="item-link">Grid</a></li>
-            <li class="menu-item"><a href="/UI-library/page/button.html" class="item-link">Button</a></li>
+            <li class="menu-item menu-items">Components
+              <ul class="items-list">
+                <li class="menu-item"><a href="/UI-library/page/сomponents/button.html" class="item-link">Button</a></li>
+                <li class="menu-item"><a href="/UI-library/page/сomponents/modal.html" class="item-link">Modal</a></li>
+                <li class="menu-item"><a href="/UI-library/page/сomponents/carusel.html" class="item-link">Carusel</a></li>
+              </ul>
+            </li>
             <li class="menu-item"><a href="/UI-library/index.html"class="item-link">New</a></li>
             <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-twitter"></i></a></li>
             <li class="menu-item"><a href="#" class="item-link"><i class="fab fa-google"></i></a></li>
@@ -34,234 +40,15 @@
         </nav>
     </header>
     <main>
-      <div class="container-lg">
+    <div class="container-lg">
+      <section class="section-table">
+        <h2>DataTable</h2>
         <div id="usersTable"></div>
-
-
-      <!-- <section class="section-carousel">
-        <h2>Carousel</h2>
-          <h3>data-button</h3> <button class="btn btn-info-hoverable modal-trigger" data-target="data-button">data-button info</button>
-            <p>data-button='button'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel1" class="carousel" data-basewidth="350" data-visible='1' data-type-width='px' data-button='button'></div>
-            </div>
-            <p>data-button='circle'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel2" class="carousel" data-basewidth="350" data-visible='1' data-type-width='px' data-button='circle'></div>
-            </div>
-            <p>data-button='arrow'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel3" class="carousel" data-basewidth="350" data-visible='1' data-type-width='px' data-button='arrow'></div>
-            </div>
-
-          <h3>data-visible</h3> <button class="btn btn-info-hoverable modal-trigger" data-target="data-visible">data-visible info</button>
-            <p>data-button='button'</p>
-            
-            <div class="row buttons-number align-items-baseline">
-              <p>Click to change data-visible:</p>
-              <button class="btn btn-info-hoverable" data-number="1">1</button>
-              <button class="btn btn-info-hoverable" data-number="2">2</button>
-              <button class="btn btn-info-hoverable" data-number="3">3</button>
-            </div>
-            <p>data-button='button'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel4" class="carousel carousel-number" data-basewidth="350" data-visible='1' data-type-width='px' data-button='button'></div>
-            </div>
-            <p>data-button='circle'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel5" class="carousel carousel-number" data-basewidth="350" data-visible='1' data-type-width='px' data-button='circle'></div>
-            </div>
-            <p>data-button='arrow'</p>
-            <div class="row justify-content-center"> 
-              <div id="carousel6" class="carousel carousel-number" data-basewidth="350" data-visible='1' data-type-width='px' data-button='arrow'></div>
-            </div>
-            <h3>Information on Carousel</h3>
-            <pre>
-              use this construct for correct operation
-              <code>
-                &lsaquo;div id="carousel" class="carousel" data-basewidth="number" data-visible='number' data-type-width='type' data-button='type'&rsaquo;&lsaquo;/div&rsaquo;
-              </code>
-            </pre>
-            <button class="btn btn-info-hoverable modal-trigger" data-target="info-carousel">Info carousel</button>
-      </section>  
-      <section class="section-modal">
-        <h2>Modal</h2>
-        <pre>
-          use this construct for correct operation
-          <code>
-            &lsaquo;button class="modal-trigger" data-target="send"&rsaquo;send&lsaquo;/button&rsaquo;
-
-            &lsaquo;div class="modal" id="send"&rsaquo;
-              … some html content
-              &lsaquo;button class="modal-close"&rsaquo;OK&lsaquo;/button&rsaquo;
-              &lsaquo;/div&rsaquo;
-          </code>
-        </pre>
-        <button class="btn btn-info-hoverable modal-trigger" data-target="info-modal">Info modal</button>
-        <div class="modal" id="info-modal">
-          <div class="modal-header">
-            <p>Information on Modal</p>
-          </div>
-          <div class="modal-main">
-            <p>
-              id - a unique identifier that is added to the modal window <br>
-              Add: modal
-            </p>
-            <p>
-              data-target - used to indicate buttons on which modal window it refers <br>
-              Add: button
-            </p>
-            <p>
-              modal-trigger - used to indicate that the button opens a modal window <br>
-              Add: button
-            </p> 
-            <p>
-              modal-close - used to indicate that the button closes the modal window <br>
-              Add: button
-            </p>
-            <p>
-              modal-header - class for specifying the window heading <br>
-              Add: modal
-            </p>
-            <p>
-              modal-main - class for specifying the main content of the window <br>
-              Add: modal
-            </p>
-            <p>
-              modal-footer - class for specifying the footer of the window <br>
-              Add: modal
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-success-hoverable modal-close">OK</button>
-          </div>   
-        </div>
-        <h3>Use several buttons in the modal window and through it open other modal windows</h3>
-        <div class="row justify-content-center">
-          <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
-          <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal2">Open</button>
-          <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal3">Open</button>
-          <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
-        </div>
-        <div class="modal" id="modal1">
-          <div class="modal-header">
-            <p>Modal1</p>
-          </div>
-          <div class="modal-main">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-mistakes-hoverable modal-close">Close</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal2">Open</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
-          </div>
-        </div>
-        <div class="modal" id="modal2">
-          <div class="modal-header">
-            <p>Modal2</p>
-          </div>
-          <div class="modal-main">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-mistakes-hoverable modal-close">Close</button>
-            <button class="btn btn-mistakes-hoverable modal-close">Close</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
-          </div>
-        </div>
-        <div class="modal" id="modal3">
-          <div class="modal-header">
-            <p>Modal3</p>
-          </div>
-          <div class="modal-main">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut l
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-mistakes-hoverable modal-close">Close</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal1">Open</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal4">Open</button>
-          </div>
-        </div>
-        <div class="modal" id="modal4">
-          <div class="modal-header">
-            <p>Modal4</p>
-          </div>
-          <div class="modal-main">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-mistakes-hoverable modal-close">Close</button>
-            <button type="button" class="btn btn-success-hoverable modal-trigger" data-target="modal3">Open</button>
-          </div>
-        </div>
-      </section> 
-
-      <div class="modal" id="info-carousel">
-        <div class="modal-header">
-          <p>Information on Carousel</p>
-        </div>
-        <div class="modal-main">
-          <p>
-            data-visible - used to indicate the visible number of pictures <br> 
-            Type: number</p>
-          <p>data-button - used to indicate the type of button <br> 
-            Type: button | circle | arrow</p>
-          <p>
-            data-basewidth - used to indicate the base width of the window <br>  
-            Type: number 
-          </p> 
-          <p>
-            data-type-width - used to indicate the type in which the width is set <br> 
-            Type: % | px 
-          </p>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success-hoverable modal-close">OK</button>
-        </div>
-      </div>
-
-      <div class="modal" id="data-button">
-        <div class="modal-header">
-          <p>data-button</p>
-        </div>
-        <div class="modal-main">
-          <p>data-button - used to indicate the type of button
-            Type: button | circle | arrow
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success-hoverable modal-close">OK</button>
-        </div>
-      </div>
-
-      <div class="modal" id="data-visible">
-        <div class="modal-header">
-          <p>data-visible</p>
-        </div>
-        <div class="modal-main">
-          <p>data-visible - used to indicate the visible number of pictures
-            Type: number
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success-hoverable modal-close">OK</button>
-        </div>
-      </div> -->
+      </section>
     </div>
     </main>
     <script src="./js/modal.js"></script>
     <script src="./js/nav.js"></script>
-    <!-- <script src="./js/carousel.js"></script>
-    <script src="./js/size_slider.js"></script> -->
     <script src="./js/dataTables.js"></script>
     <script src="https://kit.fontawesome.com/a92211bf3b.js" crossorigin="anonymous"></script>
 </body>
