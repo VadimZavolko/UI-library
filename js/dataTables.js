@@ -11,19 +11,21 @@ class DataTable {
       const table = document.createElement('table');
       table.setAttribute('class', 'table'); 
       this.#creatTable(table);
-      this._parent.appendChild(table);
+      this._parent.append(table);
+    }
+
+    #creatElement = (elemType, elemClass) => { 
+      const elem = document.createElement(elemType);
+      elem.classList.add(elemClass);
+      return elem
     }
 
     #creatTable = (table) => {
-      this._thead = document.createElement('thead');
-      this._thead.setAttribute('class', 'table-thead');
-      this._trHead = document.createElement('tr');
-      this._trHead.setAttribute('class', 'table-thead-tr');
-      this._tbody = document.createElement('tbody');
-      this._tbody.setAttribute('class', 'table-tbody');
+      this._thead = this.#creatElement('thead', 'table-thead');
+      this._trHead = this.#creatElement('tr', 'table-thead-tr');
+      this._tbody = this.#creatElement('tbody', 'table-tbody');;
       const trBody = this.data.map(item => {
-        const trBody = document.createElement('tr');
-        trBody.setAttribute('class', 'table-tbody-tr');
+        const trBody = this.#creatElement('tr', 'table-tbody-tr');
         return trBody;
       });
 
@@ -31,44 +33,48 @@ class DataTable {
         this.#addSearch();
       } 
 
-      this.config.columns.forEach(item => {
-        const tdHead = document.createElement('td');
-        tdHead.textContent = item.title;
-        if(item.type !== undefined && item.type === 'number'){
-          tdHead.setAttribute('class', 'align-right');
-        }
-        if(item.sortable){
-          this.#addSort(item, tdHead, item.type);
-        }
-        this._trHead.appendChild(tdHead);
-        this.data.forEach((elem, index) => {
-          const tdBody = document.createElement('td');
-          if(item.type !== undefined && item.type === 'number'){
-            tdBody.setAttribute('class', 'align-right');
-          }            
-          tdBody.textContent = item.value !== '_index'? elem[item.value] : index + 1;                
-          trBody[index].appendChild(tdBody);
-        }); 
+      this.config.columns.forEach(col => {
+        this.#addTdHead(col);
+        this.#addTdBody(col, trBody, this.data);
       });
 
-      trBody.forEach(item => this._tbody.appendChild(item));
-      this._thead.appendChild(this._trHead); 
-      table.appendChild(this._thead);
-      table.appendChild(this._tbody);
+      trBody.forEach(tr => this._tbody.append(tr));
+      this._thead.append(this._trHead); 
+      table.append(this._thead, this._tbody);
     } 
 
+    #addTdHead = (col) => {
+      const tdHead = document.createElement('td');
+      tdHead.textContent = col.title;
+      if(col.type && col.type === 'number'){
+        tdHead.classList.add('align-right');
+      }
+      if(col.sortable){
+        this.#addSort(col, tdHead, col.type);
+      }
+      this._trHead.append(tdHead);
+    }
+
+    #addTdBody = (col, trBody, data) => {
+      data.forEach((elem, index) => {
+        const tdBody = document.createElement('td');
+        if(col.type && col.type === 'number'){
+          tdBody.classList.add('align-right');
+        }            
+        tdBody.textContent = col.value !== '_index'? elem[col.value] : index + 1;                
+        trBody[index].append(tdBody);
+      }); 
+    }
+
     #addSearch = () => {
-      const trHead = document.createElement('tr');
-      trHead.setAttribute('class', 'tr-search');
-      const tdHead = document.createElement('td'); 
+      const trHead = this.#creatElement('tr', 'tr-search');
+      const tdHead = this.#creatElement('td', 'td-search'); 
       tdHead.colSpan = `${this.config.columns.length}`;
       this._search = document.createElement('input');
       this._search.setAttribute('type', 'search');
-      tdHead.setAttribute('class', 'table-search');
-      tdHead.appendChild(this._search);
-      trHead.appendChild(tdHead); 
-     
-      this._thead.appendChild(trHead);
+      tdHead.append(this._search);
+      trHead.append(tdHead); 
+      this._thead.append(trHead);
       this._search.oninput = () => {
         this.#find();
       }
@@ -79,7 +85,6 @@ class DataTable {
         let value = null;
         this.config.search.fields.forEach(field => {
           this.config.search.filters.forEach(f => {
-            console.log(f(this._search.value));
             if(f(item[field]).includes(f(this._search.value))) {
               value = item;
             }
@@ -94,17 +99,17 @@ class DataTable {
       const buttonSort = document.createElement('button');
       buttonSort.setAttribute('data-value', `${col.value}`);
       buttonSort.setAttribute('data-type', `${col.type}`);
-      const i = document.createElement('i');
-      buttonSort.appendChild(i);
-      i.setAttribute('class', col.type === undefined ? 'fas fa-sort' : 'fas fa-long-arrow-alt-up');
-      td.appendChild(buttonSort);
+      const icon = document.createElement('i');
+      icon.setAttribute('class', col.type === undefined ? 'fas fa-sort' : 'fas fa-long-arrow-alt-up');
+      buttonSort.append(icon);
+      td.append(buttonSort);
       buttonSort.onclick = () => {
         if(this._clickButton !== undefined && (buttonSort.firstChild.classList.contains('fa-long-arrow-alt-up') || buttonSort.firstChild.classList.contains('fa-sort'))) {   
           this._sortTypes.push({data: [...this._alterData], btn: this._clickButton, class: this._clickButton.firstChild.className});
           this._clickButton.firstChild.className = this._clickButton.dataset.type === 'string' || this._clickButton.dataset.type === 'number' ? 'fas fa-long-arrow-alt-up' : 'fas fa-sort';
         }
-        const sortData = this.#sortCol(this._alterData, i, col.value);
-        this.#changeSortIcon(i, type);
+        const sortData = this.#sortCol(this._alterData, icon, col.value);
+        this.#changeSortIcon(icon, type);
         this._alterData = sortData;
         this._clickButton = buttonSort;
         if(this._alterData === null){
@@ -122,65 +127,53 @@ class DataTable {
     }
 
     #renderTable = (data) => {
-        this._tbody.innerHTML = '';
-        const trBody = data.map(item => {
-          const trBody = document.createElement('tr');
-          trBody.setAttribute('class', 'table-tbody-tr');
-          return trBody;
-        }); 
-        this.config.columns.forEach((item, i) => { 
-        data.forEach((elem, index) => {
-          const tdBody = document.createElement('td');
-          if(item.type !== undefined && item.type === 'number'){
-            tdBody.setAttribute('class', 'align-right');
-          }            
-          tdBody.textContent = item.value !== '_index'? elem[item.value] : index + 1;                
-          trBody[index].appendChild(tdBody);              
-        }); 
+      this._tbody.innerHTML = '';
+      const trBody = data.map(item => {
+        const trBody = this.#creatElement('tr', 'table-tbody-tr');
+        return trBody;
+      }); 
+      this.config.columns.forEach((item) => { 
+        this.#addTdBody(item, trBody, data);
       });
-      trBody.forEach(item => this._tbody.appendChild(item));
+      trBody.forEach(item => this._tbody.append(item));
     } 
 
-    #changeSortIcon = (i, type) => {
+    #changeIcon = (removeIcon, addIcon, icon) => {
+      icon.classList.remove(removeIcon);
+      icon.classList.add(addIcon);
+    }
+
+    #changeSortIcon = (icon, type) => {
       if(type === 'number'){
-        if(i.classList.contains('fa-long-arrow-alt-up')){
-          i.classList.remove('fa-long-arrow-alt-up');
-          i.classList.add('fa-sort-numeric-down');
-        } else if(i.classList.contains('fa-sort-numeric-down')){
-          i.classList.remove('fa-sort-numeric-down');
-          i.classList.add('fa-sort-numeric-up-alt');
+        if(icon.classList.contains('fa-long-arrow-alt-up')){
+          this.#changeIcon('fa-long-arrow-alt-up', 'fa-sort-numeric-down', icon);
+        } else if(icon.classList.contains('fa-sort-numeric-down')){
+          this.#changeIcon('fa-sort-numeric-down', 'fa-sort-numeric-up-alt', icon);
         } else {
-          i.classList.remove('fa-sort-numeric-up-alt');
-          i.classList.add('fa-long-arrow-alt-up');
+          this.#changeIcon('fa-sort-numeric-up-alt', 'fa-long-arrow-alt-up', icon);
         }
       } else if(type === 'string'){
-        if(i.classList.contains('fa-long-arrow-alt-up')){
-          i.classList.remove('fa-long-arrow-alt-up');
-          i.classList.add('fa-sort-alpha-down');
-        } else if(i.classList.contains('fa-sort-alpha-down')){
-          i.classList.remove('fa-sort-alpha-down');
-          i.classList.add('fa-sort-alpha-up-alt');
+        if(icon.classList.contains('fa-long-arrow-alt-up')){
+          this.#changeIcon('fa-long-arrow-alt-up', 'fa-sort-alpha-down', icon);
+        } else if(icon.classList.contains('fa-sort-alpha-down')){
+          this.#changeIcon('fa-sort-alpha-down', 'fa-sort-alpha-up-alt', icon);
         } else {
-          i.classList.remove('fa-sort-alpha-up-alt');
-          i.classList.add('fa-long-arrow-alt-up');
+          this.#changeIcon('fa-sort-alpha-up-alt', 'fa-long-arrow-alt-up', icon);
         }
       } else {
-        if(i.classList.contains('fa-sort')){
-          i.classList.remove('fa-sort');
-          i.classList.add('fa-sort-down');
-        } else if(i.classList.contains('fa-sort-down')){
-          i.classList.remove('fa-sort-down');
-          i.classList.add('fa-sort-up');
+        if(icon.classList.contains('fa-sort')){
+          this.#changeIcon('fa-sort', 'fa-sort-down', icon);
+        } else if(icon.classList.contains('fa-sort-down')){
+          this.#changeIcon('fa-sort-down', 'fa-sort-up', icon);
         } else {
-          i.classList.remove('fa-sort-up');
-          i.classList.add('fa-sort');
+          this.#changeIcon('fa-sort-up', 'fa-sort', icon);
         }
       }
     }
 
-    #sortCol = (data, i, value) => {
+    #sortCol = (data, icon, value) => {
       let sortData = null;
-      if(i.classList.contains('fa-long-arrow-alt-up') || i.classList.contains('fa-sort')){
+      if(icon.classList.contains('fa-long-arrow-alt-up') || icon.classList.contains('fa-sort')){
         sortData = data.sort((cell1, cell2) => {
           if (String(cell1[value]).toLowerCase() > String(cell2[value]).toLowerCase()) 
             return 1;
@@ -188,8 +181,8 @@ class DataTable {
             return -1;
           return 0;
         }); 
-      } else if(i.classList.contains('fa-sort-alpha-down') || i.classList.contains('fa-sort-numeric-down')
-                || i.classList.contains('fa-sort-down')){
+      } else if(icon.classList.contains('fa-sort-alpha-down') || icon.classList.contains('fa-sort-numeric-down')
+                || icon.classList.contains('fa-sort-down')){
         sortData = data.sort((cell1, cell2) => {
           if (String(cell1[value]).toLowerCase() < String(cell2[value]).toLowerCase()) 
             return 1;
