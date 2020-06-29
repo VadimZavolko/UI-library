@@ -18,8 +18,18 @@
                 width: 100%;
             }
         }
-    }
 
+        .td-add-btn {
+            button {
+                font-size: 20px;
+                width: 90%;
+                height: 50%;
+                padding: 5%;
+                margin-left: 2%;
+                margin-bottom: 2%;
+            }
+        }
+    }
     .table-thead-tr {
         background-color: #ced6e0;
         td {
@@ -82,6 +92,13 @@
             &:last-child {
                 border-right: 1.5px solid #a4b0be;
             }
+
+            .btn {
+                font-size: 15px;
+                padding: 5%;
+                width: 60%;
+                margin-top: 1%;
+            }
         }
 
         &:hover td{
@@ -110,5 +127,15 @@
                 }
             }
         }
+    }
+}
+
+.modal-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+        display: block;
+        margin: 5%;
     }
 }

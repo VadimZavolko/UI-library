@@ -1,16 +1,27 @@
 class DataTable {
-    constructor(config, data) {
-      this.config = config;
-      this.data = data;
-      this._parent = document.querySelector(`${this.config.parent}`);      
-      this._alterData = [...this.data];
+    constructor(config, data = null) {
       this._sortTypes = [];
+      this.config = config;
+      this._parent = document.querySelector(`${this.config.parent}`); 
+      this.data = data;
+      this._apiUrl = new ApiUrl(this.config.apiUrl);
+      this._typeSort = null;
     }
 
-    creatTable(){
+    #processData = async (item) => {
+      let data = item;
+      if(item === null && this.config.apiUrl){
+        data = await this._apiUrl.getApiData();
+      }     
+      this._alterData = [...data];
+      return data;
+    };
+
+    creatTable = async () =>{
+      this.data = await this.#processData(this.data);
       const table = document.createElement('table');
       table.setAttribute('class', 'table'); 
-      this.#creatTable(table);
+      this.#creatTableContent(table);
       this._parent.append(table);
     }
 
@@ -20,54 +31,227 @@ class DataTable {
       return elem
     }
 
-    #creatTable = (table) => {
+    #creatTableContent = (table) => {
       this._thead = this.#creatElement('thead', 'table-thead');
       this._trHead = this.#creatElement('tr', 'table-thead-tr');
       this._tbody = this.#creatElement('tbody', 'table-tbody');;
-      const trBody = this.data.map(item => {
-        const trBody = this.#creatElement('tr', 'table-tbody-tr');
-        return trBody;
-      });
-
+      const trBody = [];
+      this.trSearch = this.#creatElement('tr', 'tr-search');
       if(this.config.search){
-        this.#addSearch();
-      } 
+        this.#addSearch(this.trSearch);
+      }
+      const tdHead = document.createElement('td');
+      tdHead.classList.add('td-add-btn');
+      const btnAdd = document.createElement('button');
+      btnAdd.setAttribute('data-target', 'modal-data');
+      btnAdd.className = 'btn btn-success-hoverable modal-trigger';
+      btnAdd.textContent = 'Add';
+      this.#add(btnAdd);
+      tdHead.append(btnAdd);
+      this.trSearch.append(tdHead);
+      this.#createModal();
 
-      this.config.columns.forEach(col => {
-        this.#addTdHead(col);
-        this.#addTdBody(col, trBody, this.data);
-      });
+      this.#addTdHead();
+      this.#addTdBody(trBody, this.data);
+
+      this.#addActionButtons(trBody);
 
       trBody.forEach(tr => this._tbody.append(tr));
       this._thead.append(this._trHead); 
       table.append(this._thead, this._tbody);
     } 
 
-    #addTdHead = (col) => {
+    #addActionButtons = (trBody) => {
+      trBody.forEach((item, index) => {
+        const tdBody = document.createElement('td');
+        const btnDelete = document.createElement('button');
+        btnDelete.className = 'btn btn-mistakes-hoverable';
+        btnDelete.textContent = 'Delete';
+        this.#delete(btnDelete, index);
+        const btnUpdate = document.createElement('button');
+        btnUpdate.className = 'btn btn-warnings-hoverable modal-trigger';
+        btnUpdate.textContent = 'Update';
+        btnUpdate.setAttribute('data-target', 'modal-data');
+        this.#update(btnUpdate, index);
+        tdBody.append(btnDelete, btnUpdate);
+        item.append(tdBody);
+      });
+    }
+
+    #createModal = () => {
+      const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.setAttribute('id', 'modal-data');
+      const headerModal = document.createElement('div');
+      headerModal.classList.add('modal-header');
+      const pHeaderModal = document.createElement('p');
+      pHeaderModal.textContent = 'Data'
+      const mainModal = document.createElement('div');
+      mainModal.classList.add('modal-main');
+      const footerModal = document.createElement('div');
+      footerModal.classList.add('modal-footer');
+      const btnClose = document.createElement('button');
+      btnClose.className = 'btn btn-mistakes-hoverable modal-close';
+      btnClose.textContent = 'Отмена';
+      const btnSave = document.createElement('button');
+      btnSave.className = 'btn btn-success-hoverable save-btn  modal-close';
+      btnSave.textContent = 'Сохранить';
+
+      this.config.columns.forEach(col => {
+        if(col.value !== '_index' && !col.editable && col.editable !== undefined){
+          const field = document.createElement('field');
+          field.textContent = col.title;
+          const input = document.createElement('input');
+          input.setAttribute('name', `${col.value}`);
+          if(col.type && col.type === 'date'){
+            input.setAttribute('type', 'datetime-local');
+          } else if(col.type && col.type === 'number'){
+            input.setAttribute('type', 'number');
+          } else {
+            input.setAttribute('type', 'text');
+          }  
+          field.append(input);
+          mainModal.append(field);
+        }
+      });
+
+      headerModal.append(pHeaderModal);
+      footerModal.append(btnClose, btnSave);
+      modal.append(headerModal, mainModal, footerModal);
+      document.body.append(modal);
+      addСrossСlosingAndFon();
+    }
+
+    #delete = (btn, i) => {
+      btn.onclick = async () => {
+       await this._apiUrl.deleteApiDataObj(this._alterData[i]);
+        this.data = await this.#processData(null);
+
+        if(this._colSort) { 
+          const sortData = this.#sortCol(this._alterData, this._typeSort, this._colSort);
+          this._alterData = !sortData ? [...this.data] : sortData;
+        }
+
+        !this._search.value ? this.#renderTable(this._alterData) : this.#find();
+      };
+    }
+
+    #update = (btn, i) => {
+       btn.onclick = () => {
+          const btnSave = document.querySelector('.save-btn');
+          const btnClose = document.querySelectorAll('.modal-close');
+          const modalInput = document.querySelectorAll('.modal .modal-main field input');
+          modalInput.forEach(item => {
+            item.value = this._alterData[i][item.name];
+            item.oninput = () => {
+              this._alterData[i][item.name] = item.value;
+            } 
+          });
+          btnSave.addEventListener('click', async () => {
+            await this._apiUrl.updateApiDataObj(this._alterData[i]);
+            this.data = await this.#processData(null);
+ 
+            if(this._colSort) { 
+              const sortData = this.#sortCol(this._alterData, this._typeSort, this._colSort);
+              this._alterData = !sortData ? [...this.data] : sortData;
+            }
+ 
+            !this._search.value ? this.#renderTable(this._alterData) : this.#find();
+          });
+
+          btnClose.forEach(item => {
+            item.addEventListener('click', () => {
+              modalInput.forEach(item => {
+                item.value = '';
+              });
+            });
+          });
+       };
+    }
+
+    #add = (btn) => {
+      btn.onclick = () => {
+        const btnSave = document.querySelector('.save-btn');
+        const btnClose = document.querySelectorAll('.modal-close');
+        const modalInput = document.querySelectorAll('.modal .modal-main field input');
+        const newItem = Object.assign({}, this._alterData[length - 1]);
+        newItem.id = length;
+        modalInput.forEach(item => {
+          item.oninput = () => {
+            newItem[item.name] = item.value;
+          } 
+        });
+        btnSave.addEventListener('click', async () => {
+          await this._apiUrl.insertApiDataObj(newItem);
+          this.data = await this.#processData(null);
+ 
+          if(this._colSort) { 
+            const sortData = this.#sortCol(this._alterData, this._typeSort, this._colSort);
+            this._alterData = !sortData ? [...this.data] : sortData;
+          }
+ 
+          !this._search.value ? this.#renderTable(this._alterData) : this.#find();
+        });
+
+        btnClose.forEach(item => {
+          item.addEventListener('click', () => {
+            modalInput.forEach(item => {
+              item.value = '';
+            });
+          });
+        });
+      };
+    }
+
+    #addTdHead = () => {
+      this.config.columns.forEach(col => {
+        const tdHead = document.createElement('td');
+        tdHead.textContent = col.title;
+        if(col.type && col.type === 'number'){
+          tdHead.classList.add('align-right');
+        }
+
+        if(col.sortable){
+          this.#addSort(col, tdHead, col.type);
+        }
+        this._trHead.append(tdHead);
+      });
+
       const tdHead = document.createElement('td');
-      tdHead.textContent = col.title;
-      if(col.type && col.type === 'number'){
-        tdHead.classList.add('align-right');
-      }
-      if(col.sortable){
-        this.#addSort(col, tdHead, col.type);
-      }
+      tdHead.textContent = 'Action';
       this._trHead.append(tdHead);
     }
 
-    #addTdBody = (col, trBody, data) => {
+    #addTdBody = (tr, data) => {
       data.forEach((elem, index) => {
-        const tdBody = document.createElement('td');
-        if(col.type && col.type === 'number'){
-          tdBody.classList.add('align-right');
-        }            
-        tdBody.textContent = col.value !== '_index'? elem[col.value] : index + 1;                
-        trBody[index].append(tdBody);
-      }); 
+        const trBody = this.#creatElement('tr', 'table-tbody-tr');
+        tr.push(trBody);
+        this.config.columns.forEach(col => {
+          const tdBody = document.createElement('td');
+          if(col.type && col.type === 'number'){
+            tdBody.classList.add('align-right');
+          }
+          if(col.type && col.type === 'img'){
+            const img = document.createElement('img');
+            img.style.width = 50 + 'px';
+            img.setAttribute('src', elem[col.value]); 
+            tdBody.append(img);
+          } else if(col.type && col.type === 'date'){
+            const date = new Date(elem[col.value]);
+            tdBody.textContent = col.value !== '_index'?
+            `${date.getFullYear()}-${String(date.getMonth()).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+              : index + 1;
+          } else if(typeof col.value === 'function'){
+            tdBody.textContent = col.value(elem);
+          }else {
+            tdBody.textContent = col.value !== '_index'? elem[col.value] : index + 1;
+          }               
+          trBody.append(tdBody);
+        });
+      });
     }
 
-    #addSearch = () => {
-      const trHead = this.#creatElement('tr', 'tr-search');
+    #addSearch = (trHead) => {
       const tdHead = this.#creatElement('td', 'td-search'); 
       tdHead.colSpan = `${this.config.columns.length}`;
       this._search = document.createElement('input');
@@ -104,37 +288,35 @@ class DataTable {
       buttonSort.append(icon);
       td.append(buttonSort);
       buttonSort.onclick = () => {
-        if(this._clickButton !== undefined && (buttonSort.firstChild.classList.contains('fa-long-arrow-alt-up') || buttonSort.firstChild.classList.contains('fa-sort'))) {   
-          this._sortTypes.push({data: [...this._alterData], btn: this._clickButton, class: this._clickButton.firstChild.className});
-          this._clickButton.firstChild.className = this._clickButton.dataset.type === 'string' || this._clickButton.dataset.type === 'number' ? 'fas fa-long-arrow-alt-up' : 'fas fa-sort';
+        if(this._clickButton !== undefined 
+          && (buttonSort.firstChild.classList.contains('fa-long-arrow-alt-up')
+              || buttonSort.firstChild.classList.contains('fa-sort'))) {   
+          this._clickButton.firstChild.className = this._clickButton.dataset.type === 'string' 
+            || this._clickButton.dataset.type === 'number' ?
+              'fas fa-long-arrow-alt-up' : 'fas fa-sort';
         }
-        const sortData = this.#sortCol(this._alterData, icon, col.value);
+        if(!this._typeSort){
+          this._typeSort = 1;
+        } else if(this._typeSort === 1){
+          this._typeSort = 2;
+        } else {
+          this._typeSort = null;
+        }
+        const sortData = this.#sortCol(this._alterData, this._typeSort, col.value);
         this.#changeSortIcon(icon, type);
-        this._alterData = sortData;
+        this._colSort = col.value;
+        this._alterData = sortData === null ? [...this.data] : sortData;
         this._clickButton = buttonSort;
-        if(this._alterData === null){
-          if(this._sortTypes.length > 0){
-            const sort = this._sortTypes.pop();
-            sort.btn.firstChild.className = sort.class; 
-            this._alterData = sort.data;
-            this._clickButton = sort.btn;
-          } else {
-            this._alterData = [...this.data];
-          }
-        }
         !this._search.value ? this.#renderTable(this._alterData) : this.#find();
       }
     }
 
     #renderTable = (data) => {
       this._tbody.innerHTML = '';
-      const trBody = data.map(item => {
-        const trBody = this.#creatElement('tr', 'table-tbody-tr');
-        return trBody;
-      }); 
-      this.config.columns.forEach((item) => { 
-        this.#addTdBody(item, trBody, data);
-      });
+      const trBody = [];
+      this.#addTdBody(trBody, data);
+      this.#addActionButtons(trBody);
+
       trBody.forEach(item => this._tbody.append(item));
     } 
 
@@ -171,9 +353,9 @@ class DataTable {
       }
     }
 
-    #sortCol = (data, icon, value) => {
+    #sortCol = (data, type, value) => {
       let sortData = null;
-      if(icon.classList.contains('fa-long-arrow-alt-up') || icon.classList.contains('fa-sort')){
+      if(type === 1){
         sortData = data.sort((cell1, cell2) => {
           if (String(cell1[value]).toLowerCase() > String(cell2[value]).toLowerCase()) 
             return 1;
@@ -181,8 +363,7 @@ class DataTable {
             return -1;
           return 0;
         }); 
-      } else if(icon.classList.contains('fa-sort-alpha-down') || icon.classList.contains('fa-sort-numeric-down')
-                || icon.classList.contains('fa-sort-down')){
+      }else if(type === 2){
         sortData = data.sort((cell1, cell2) => {
           if (String(cell1[value]).toLowerCase() < String(cell2[value]).toLowerCase()) 
             return 1;
@@ -191,7 +372,6 @@ class DataTable {
           return 0;
         }); 
       }
-
       return sortData;
     }
  }
@@ -208,15 +388,25 @@ class DataTable {
   });
 }
 
+const calculateAge = (birthday) => {
+  
+  console.log(new Date(birthday).getFullYear());
+
+  return Number(new Date().getFullYear()) - Number(new Date(birthday).getFullYear()); 
+}
+
  const config1 = {
-   parent: '#usersTable',
-   columns: [
+    parent: '#usersTable',
+    columns: [
      {title: '№', value: '_index'},
-     {title: 'Имя', value: 'name', type: 'string', sortable: true},
-     {title: 'Фамилия', value: 'surname', sortable: true},
-     {title: 'Возраст', value: 'age', type: 'number', sortable: true},
-   ],
-   search: {
+     {title: 'Аватар', value: 'avatar', type: 'img', editable: false},
+     {title: 'Имя', value: 'name', type: 'string', sortable: true, editable: false},
+     {title: 'Фамилия', value: 'surname', sortable: true, editable: false},
+     {title: 'Дата рождения', value: 'birthday', type: 'date', sortable: true, editable: false},
+     {title: 'Возраст', value: (user) => calculateAge(user.birthday), type: 'number'},
+    ],
+    apiUrl: "https://5e938231c7393c0016de48e6.mockapi.io/api/ps5/customers",
+    search: {
      fields: ['name', 'surname'],
      filters: [
        v => toKeyboardLayout(v) 
@@ -225,18 +415,18 @@ class DataTable {
  
  };
  
- const users = [
-   {id: 30050, name: 'Вася', surname: 'Петров', age: 25},
-   {id: 30051, name: 'Петров', surname: 'Васечкин', age: 15},
-   {id: 30050, name: 'Вася', surname: 'Петров', age: 17},
-   {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
-   {id: 30050, name: 'Васечкин', surname: 'Петров', age: 12},
-   {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
-   {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
-   {id: 30051, name: 'Васечкин', surname: 'Васечкин', age: 18},
-   {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
-   {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
- ];
+   const users = [
+     {id: 30050, name: 'Вася', surname: 'Петров', age: 25},
+     {id: 30051, name: 'Петров', surname: 'Васечкин', age: 15},
+     {id: 30050, name: 'Вася', surname: 'Петров', age: 17},
+     {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
+     {id: 30050, name: 'Васечкин', surname: 'Петров', age: 12},
+     {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
+     {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
+     {id: 30051, name: 'Васечкин', surname: 'Васечкин', age: 18},
+     {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
+     {id: 30051, name: 'Вася', surname: 'Васечкин', age: 15},
+  ];
  
-new DataTable(config1, users).creatTable();
+new DataTable(config1, /*users*/).creatTable();
  
