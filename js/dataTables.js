@@ -12,7 +12,7 @@ class DataTable {
       let data = item;
       if(item === null && this.config.apiUrl){
         data = await this._apiUrl.getApiData();
-      }     
+      }
       this._alterData = [...data];
       return data;
     };
@@ -147,7 +147,7 @@ class DataTable {
               this._alterData[i][item.name] = item.value;
             } 
           });
-          btnSave.addEventListener('click', async () => {
+          btnSave.onclick = async () => {
             await this._apiUrl.updateApiDataObj(this._alterData[i]);
             this.data = await this.#processData(null);
  
@@ -157,7 +157,7 @@ class DataTable {
             }
  
             !this._search.value ? this.#renderTable(this._alterData) : this.#find();
-          });
+          };
 
           btnClose.forEach(item => {
             item.addEventListener('click', () => {
@@ -181,7 +181,7 @@ class DataTable {
             newItem[item.name] = item.value;
           } 
         });
-        btnSave.addEventListener('click', async () => {
+          btnSave.onclick = async () => {
           await this._apiUrl.insertApiDataObj(newItem);
           this.data = await this.#processData(null);
  
@@ -191,7 +191,7 @@ class DataTable {
           }
  
           !this._search.value ? this.#renderTable(this._alterData) : this.#find();
-        });
+        };
 
         btnClose.forEach(item => {
           item.addEventListener('click', () => {
