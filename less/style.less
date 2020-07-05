@@ -83,6 +83,31 @@ pre {
     margin: 5% 0;
 }
 
-.section-table {
+.section-table, .section-input {
     padding: 10% 0;
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    outline: transparent;
+    box-shadow: 0px 0px 4px 1px red;
+    border: 1px solid gainsboro;
+}
+
+.error-text {
+    display: block;
+    font-size: 14px;
+    color: red;
+}
+
+.invalid:focus {
+    outline: transparent;
+    box-shadow: 0px 0px 4px 1px blue;
+    border: 1px solid gainsboro;
+}
+
+label {
+    display: block;
+    margin-bottom: 10%;
 }

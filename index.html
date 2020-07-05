@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI-library</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet/less" type="text/css" href="less/grid.less">
+    <link rel="stylesheet/less" type="text/css" href="./less/grid.less">
     <link rel="stylesheet/less" type="text/css" href="less/button.less">
     <link rel="stylesheet/less" type="text/css" href="less/modal.less">
     <link rel="stylesheet/less" type="text/css" href="less/nav.less">
     <link rel="stylesheet/less" type="text/css" href="less/carousel.less">
-    <link rel="stylesheet/less" type="text/css" href="less/dataTables.less">
+    <link rel="stylesheet/less" type="text/css" href="./less/dataTables.less">
     <link rel="stylesheet/less" type="text/css" href="less/style.less">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet"> 
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <header>
         <nav>
-          <div class="logo"><img src="favicon.png" alt="Bunny"><h1>UI-library</div>
+          <div class="logo"><img src="favicon.png" alt="Bunny"><h1>UI-library</h1></div>
           <div class="burger"><i class="fas fa-bars"></i></div>
           <ul class="nav-menu">
             <li class="menu-item"><a href="/UI-library/page/grid.html" class="item-link">Grid</a></li>
@@ -40,16 +41,51 @@
         </nav>
     </header>
     <main>
-    <div class="container-lg">
-      <section class="section-table">
-        <h2>DataTable</h2>
-        <div id="usersTable"></div>
+    <div class="container-xl">
+      <section class="section-input">
+
+          <div id="app">
+              <div>{{questions[0].value}}</div>
+              <my-input
+                      v-for="q in questions"
+              :key="q.title"
+              :type="q.type"
+              :title="q.title"
+              :placeholder="q.placeholder"
+              :required="q.required"
+              :pattern="q.pattern"
+              :errormessage="q.errormessage"
+              v-model="q.value"></my-input>
+          </div>
+          <script src="js/my-input.js"></script>
+          <script>
+              let app = new Vue({
+                  el: '#app',
+                  data: {
+                      questions: [
+                          { title: "Как тебя зовут?", placeholder: "Иван",
+                           pattern: /\+380\d{7}/,
+                           errormessage:'Введите номер в формате +380ХХХХХХХ',  required: true
+                          },
+                          { title: "Сколько тебе лет?", placeholder: "15", type: "number",
+                           pattern: /(!-)[0-9]+/,
+                           errormessage:'Неверное число',
+                           },
+                          { title: "Твой email", placeholder: "ivan@example.com", required: true,
+                           pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                           errormessage:'Неверный адрес почты', 
+                          }
+                      ]
+                  }
+              })
+          </script>
       </section>
     </div>
     </main>
     <script src="./js/modal.js"></script>
     <script src="./js/nav.js"></script>
-    <script src="./js/dataTables.js"></script>
+<!--    <script src="./js/apiURL.js"></script>-->
+<!--    <script src="./js/dataTables.js"></script> -->
     <script src="https://kit.fontawesome.com/a92211bf3b.js" crossorigin="anonymous"></script>
 </body>
 </html>
