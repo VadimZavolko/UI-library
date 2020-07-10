@@ -45,9 +45,10 @@
       <section class="section-input">
 
           <div id="app">
-              <div>{{questions[0].value}}</div>
-              <my-input
-                      v-for="q in questions"
+              <h2>My input</h2>
+              <p>questions[0].value</p>
+              <div class="v-modal">{{questions[0].value}}</div>
+              <my-input v-for="q in questions"
               :key="q.title"
               :type="q.type"
               :title="q.title"
